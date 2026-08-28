@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thangyan Style Login</title>
+    <title>Thangyan Style Learning</title>
     <style>
         * {
             margin: 0;
@@ -115,7 +115,7 @@
             border-color: #00f2fe;
         }
 
-        .login-btn {
+        .login-btn, .action-btn {
             width: 100%;
             padding: 12px;
             background: linear-gradient(90deg, #00f2fe, #4facfe);
@@ -127,7 +127,7 @@
             transition: opacity 0.3s;
         }
 
-        .login-btn:hover {
+        .login-btn:hover, .action-btn:hover {
             opacity: 0.9;
         }
 
@@ -137,23 +137,36 @@
             margin-top: 10px;
         }
 
-        #welcome-screen {
+        /* Welcome & Unit Screen Styles */
+        #welcome-screen, #course-screen {
             display: none;
             text-align: center;
             z-index: 20;
+            background: rgba(17, 24, 39, 0.9);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            width: 380px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        #welcome-screen h1 {
-            font-size: 32px;
-            background: linear-gradient(90deg, #00f2fe, #4facfe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+        #welcome-screen h1, #course-screen h1 {
+            font-size: 28px;
+            color: #00f2fe;
+            margin-bottom: 15px;
+        }
+
+        #welcome-screen p, #course-screen p {
+            color: #9ca3af;
+            margin-bottom: 25px;
+            font-size: 15px;
         }
     </style>
 </head>
 <body>
-<div id="loader-screen">
+
+    <!-- Loading Screen -->
+    <div id="loader-screen">
         <div class="load-content">
             <div class="loading-container">
                 <div class="loading-bar" id="bar"></div>
@@ -162,6 +175,7 @@
         </div>
     </div>
 
+    <!-- Login Screen -->
     <div id="login-screen">
         <h2>LOGIN</h2>
         <div class="input-group">
@@ -176,9 +190,18 @@
         <div class="error-msg" id="error"></div>
     </div>
 
+    <!-- Welcome / Unit 2 Screen -->
     <div id="welcome-screen">
         <h1 id="welcome-title">Welcome!</h1>
-        <p>အောင်မြင်စွာ ဝင်ရောက်နိုင်ပါပြီ။</p>
+        <p>Unit (2) လေ့လာရန် အဆင်သင့်ဖြစ်ပါပြီ။</p>
+        <button class="action-btn" onclick="startLearning()">Start to learn</button>
+    </div>
+
+    <!-- Course / Next Page Screen -->
+    <div id="course-screen">
+        <h1>Unit (2): Lessons</h1>
+        <p>သင်ခန်းစာအသစ်များကို စတင်လေ့လာနေပါပြီ...</p>
+        <button class="action-btn" onclick="goBack()">Back to Home</button>
     </div>
 
     <script>
@@ -216,6 +239,16 @@
             } else {
                 errorMsg.innerText = "နာမည် (သို့) Password မှားနေပါသည်! (admin / 123 ကိုသုံးပါ)";
             }
+        }
+
+        function startLearning() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('course-screen').style.display = 'block';
+        }
+
+        function goBack() {
+            document.getElementById('course-screen').style.display = 'none';
+            document.getElementById('welcome-screen').style.display = 'block';
         }
     </script>
 </body>
