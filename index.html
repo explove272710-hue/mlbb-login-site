@@ -1,0 +1,81 @@
+#welcome-screen h1 {
+            font-size: 32px;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen (သင်္ကြန်ပုံနောက်ခံနဲ့) -->
+    <div id="loader-screen">
+        <div class="load-content">
+            <div class="loading-container">
+                <div class="loading-bar" id="bar"></div>
+            </div>
+            <div class="loading-text" id="load-text">LOADING 0%</div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login-screen">
+        <h2>LOGIN</h2>
+        <div class="input-group">
+            <label>Name (Username)</label>
+            <input type="text" id="username" placeholder="နာမည်ထည့်ပါ">
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="စကားဝှက်ထည့်ပါ">
+        </div>
+        <button class="login-btn" onclick="checkLogin()">ENTER</button>
+        <div class="error-msg" id="error"></div>
+    </div>
+
+    <!-- Welcome Page -->
+    <div id="welcome-screen">
+        <h1 id="welcome-title">Welcome!</h1>
+        <p>အောင်မြင်စွာ ဝင်ရောက်နိုင်ပါပြီ။</p>
+    </div>
+
+    <script>
+        let width = 0;
+        const bar = document.getElementById('bar');
+        const loadText = document.getElementById('load-text');
+        const loaderScreen = document.getElementById('loader-screen');
+        const loginScreen = document.getElementById('login-screen');
+
+        let interval = setInterval(() => {
+            if (width >= 100) {
+                clearInterval(interval);
+                loaderScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loaderScreen.style.display = 'none';
+                    loginScreen.style.display = 'block';
+                }, 500);
+            } else {
+                width++;
+                bar.style.width = width + '%';
+                loadText.innerText = 'LOADING ' + width + '%';
+            }
+        }, 30);
+
+        function checkLogin() {
+            let userInput = document.getElementById('username').value;
+            let passInput = document.getElementById('password').value;
+            let errorMsg = document.getElementById('error');
+
+            if (userInput === "admin" && passInput === "123") {
+                document.getElementById('login-screen').style.display = 'none';
+                let welcomeScreen = document.getElementById('welcome-screen');
+                welcomeScreen.style.display = 'block';
+                document.getElementById('welcome-title').innerText = "Welcome, " + userInput + "!";
+            } else {
+                errorMsg.innerText = "နာမည် (သို့) Password မှားနေပါသည်! (admin / 123 ကိုသုံးပါ)";
+            }
+        }
+    </script>
+</body>
+</html>
