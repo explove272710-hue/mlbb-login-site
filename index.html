@@ -1,4 +1,149 @@
-#welcome-screen h1 {
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thangyan Style Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #loader-screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 80px;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        .load-content {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px 30px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .loading-container {
+            width: 280px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            transition: width 0.1s linear;
+        }
+
+        .loading-text {
+            margin-top: 10px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #00f2fe;
+            font-weight: bold;
+        }
+
+        #login-screen {
+            display: none;
+            background: rgba(17, 24, 39, 0.9);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            width: 350px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            z-index: 20;
+        }
+
+        #login-screen h2 {
+            margin-bottom: 25px;
+            color: #00f2fe;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            color: #fff;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #00f2fe;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            border: none;
+            border-radius: 6px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .login-btn:hover {
+            opacity: 0.9;
+        }
+
+        .error-msg {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        #welcome-screen {
+            display: none;
+            text-align: center;
+            z-index: 20;
+        }
+
+        #welcome-screen h1 {
             font-size: 32px;
             background: linear-gradient(90deg, #00f2fe, #4facfe);
             -webkit-background-clip: text;
@@ -8,9 +153,7 @@
     </style>
 </head>
 <body>
-
-    <!-- Loading Screen (သင်္ကြန်ပုံနောက်ခံနဲ့) -->
-    <div id="loader-screen">
+<div id="loader-screen">
         <div class="load-content">
             <div class="loading-container">
                 <div class="loading-bar" id="bar"></div>
@@ -19,7 +162,6 @@
         </div>
     </div>
 
-    <!-- Login Screen -->
     <div id="login-screen">
         <h2>LOGIN</h2>
         <div class="input-group">
@@ -34,7 +176,6 @@
         <div class="error-msg" id="error"></div>
     </div>
 
-    <!-- Welcome Page -->
     <div id="welcome-screen">
         <h1 id="welcome-title">Welcome!</h1>
         <p>အောင်မြင်စွာ ဝင်ရောက်နိုင်ပါပြီ။</p>
