@@ -3,253 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thangyan Style Learning</title>
+    <title>Loading Screen</title>
     <style>
-        * {
+        body, html {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #0b0f19;
-            color: #ffffff;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        #loader-screen {
-            position: absolute;
-            width: 100%;
             height: 100%;
-            background: url('image.jpg') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            padding-bottom: 80px;
-            z-index: 10;
-            transition: opacity 0.5s ease;
-        }
-
-        .load-content {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 20px 30px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            backdrop-filter: blur(5px);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #000;
         }
 
         .loading-container {
-            width: 280px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            overflow: hidden;
             position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('zin ko.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
         }
 
-        .loading-bar {
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #00f2fe, #4facfe);
-            transition: width 0.1s linear;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
         }
 
         .loading-text {
-            margin-top: 10px;
-            font-size: 14px;
+            font-size: 35px;
+            font-weight: bold;
             letter-spacing: 2px;
-            color: #00f2fe;
-            font-weight: bold;
-        }
-
-        #login-screen {
-            display: none;
-            background: rgba(17, 24, 39, 0.9);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            width: 350px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            z-index: 20;
-        }
-
-        #login-screen h2 {
-            margin-bottom: 25px;
-            color: #00f2fe;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 13px;
-            color: #9ca3af;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            background: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 6px;
-            color: #fff;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: #00f2fe;
-        }
-
-        .login-btn, .action-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(90deg, #00f2fe, #4facfe);
-            border: none;
-            border-radius: 6px;
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-
-        .login-btn:hover, .action-btn:hover {
-            opacity: 0.9;
-        }
-
-        .error-msg {
-            color: #ef4444;
-            font-size: 12px;
-            margin-top: 10px;
-        }
-
-        /* Welcome & Unit Screen Styles */
-        #welcome-screen, #course-screen {
-            display: none;
-            text-align: center;
-            z-index: 20;
-            background: rgba(17, 24, 39, 0.9);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            width: 380px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        #welcome-screen h1, #course-screen h1 {
-            font-size: 28px;
-            color: #00f2fe;
-            margin-bottom: 15px;
-        }
-
-        #welcome-screen p, #course-screen p {
-            color: #9ca3af;
-            margin-bottom: 25px;
-            font-size: 15px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
         }
     </style>
 </head>
 <body>
 
-    <!-- Loading Screen -->
-    <div id="loader-screen">
-        <div class="load-content">
-            <div class="loading-container">
-                <div class="loading-bar" id="bar"></div>
-            </div>
-            <div class="loading-text" id="load-text">LOADING 0%</div>
+    <div class="loading-container">
+        <div class="overlay"></div>
+        
+        <div class="content">
+            <div class="loading-text" id="loadingText">Loading... 0%</div>
         </div>
-    </div>
-
-    <!-- Login Screen -->
-    <div id="login-screen">
-        <h2>LOGIN</h2>
-        <div class="input-group">
-            <label>Name (Username)</label>
-            <input type="text" id="username" placeholder="နာမည်ထည့်ပါ">
-        </div>
-        <div class="input-group">
-            <label>Password</label>
-            <input type="password" id="password" placeholder="စကားဝှက်ထည့်ပါ">
-        </div>
-        <button class="login-btn" onclick="checkLogin()">ENTER</button>
-        <div class="error-msg" id="error"></div>
-    </div>
-
-    <!-- Welcome / Unit 2 Screen -->
-    <div id="welcome-screen">
-        <h1 id="welcome-title">Welcome!</h1>
-        <p>Unit (2) လေ့လာရန် အဆင်သင့်ဖြစ်ပါပြီ။</p>
-        <button class="action-btn" onclick="startLearning()">Start to learn</button>
-    </div>
-
-    <!-- Course / Next Page Screen -->
-    <div id="course-screen">
-        <h1>Unit (2): Lessons</h1>
-        <p>သင်ခန်းစာအသစ်များကို စတင်လေ့လာနေပါပြီ...</p>
-        <button class="action-btn" onclick="goBack()">Back to Home</button>
     </div>
 
     <script>
-        let width = 0;
-        const bar = document.getElementById('bar');
-        const loadText = document.getElementById('load-text');
-        const loaderScreen = document.getElementById('loader-screen');
-        const loginScreen = document.getElementById('login-screen');
+        const loadingText = document.getElementById('loadingText');
+        
+        // စက္ကန့် ၃၀ (မီလီစက္ကန့် ၃၀၀၀၀) ကြာအောင် သတ်မှတ်ထားသည်
+        const totalDuration = 30000; 
+        const intervalTime = 300; // ဘယ်လောက်နှုန်းနဲ့ တက်မလဲ (0.3 စက္ကန့်တစ်ကြိမ်)
+        const totalSteps = totalDuration / intervalTime;
+        const increment = 100 / totalSteps;
+        
+        let currentProgress = 0;
 
-        let interval = setInterval(() => {
-            if (width >= 100) {
-                clearInterval(interval);
-                loaderScreen.style.opacity = '0';
+        const timer = setInterval(() => {
+            currentProgress += increment;
+            
+            if (currentProgress >= 100) {
+                currentProgress = 100;
+                loadingText.innerText = "Loading... 100%";
+                clearInterval(timer);
+                
+                // ၁၀၀% ပြည့်တာနဲ့ နောက်တစ်မျက်နှာ (home.html) ကို သွားမည်
                 setTimeout(() => {
-                    loaderScreen.style.display = 'none';
-                    loginScreen.style.display = 'block';
+                    window.location.href = "home.html";
                 }, 500);
             } else {
-                width++;
-                bar.style.width = width + '%';
-                loadText.innerText = 'LOADING ' + width + '%';
+                loadingText.innerText = Loading... ${Math.floor(currentProgress)}%;
             }
-        }, 30);
-
-        function checkLogin() {
-            let userInput = document.getElementById('username').value;
-            let passInput = document.getElementById('password').value;
-            let errorMsg = document.getElementById('error');
-
-            if (userInput === "admin" && passInput === "123") {
-                document.getElementById('login-screen').style.display = 'none';
-                let welcomeScreen = document.getElementById('welcome-screen');
-                welcomeScreen.style.display = 'block';
-                document.getElementById('welcome-title').innerText = "Welcome, " + userInput + "!";
-            } else {
-                errorMsg.innerText = "နာမည် (သို့) Password မှားနေပါသည်! (admin / 123 ကိုသုံးပါ)";
-            }
-        }
-
-        function startLearning() {
-            document.getElementById('welcome-screen').style.display = 'none';
-            document.getElementById('course-screen').style.display = 'block';
-        }
-
-        function goBack() {
-            document.getElementById('course-screen').style.display = 'none';
-            document.getElementById('welcome-screen').style.display = 'block';
-        }
+        }, intervalTime);
     </script>
+
 </body>
 </html>
